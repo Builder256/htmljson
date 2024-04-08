@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>ホームページ</title>
+</head>
+<body>
+    <h1 id="title"></h1>
+    <p id="content"></p>
+    <p id="author"></p>
+    <ul id="tags"></ul>
+
+    <script>
+        // JSONファイルの読み込み
+        fetch('data.json')
+            .then(response => response.json())
+            .then(data => {
+                // タイトルを表示する要素に設定する
+                document.getElementById('title').textContent = data.title;
+
+                // コンテンツを表示する要素に設定する
+                document.getElementById('content').textContent = data.content;
+
+                // 著者を表示する要素に設定する
+                document.getElementById('author').textContent = "Written by " + data.author.name + " (" + data.author.email + ")";
+
+                // タグを表示する要素に設定する
+                var tagsList = "";
+                data.tags.forEach(function(tag) {
+                    tagsList += "<li>" + tag + "</li>";
+                });
+                document.getElementById('tags').innerHTML = tagsList;
+            })
+            .catch(error => {
+                console.error('データの読み込みに失敗しました', error);
+            });
+    </script>
+</body>
+</html>

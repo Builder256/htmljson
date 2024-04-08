@@ -1,0 +1,10 @@
+{
+  "title": "サンプル文書",
+  "content": "これはサンプルの文書です。",
+  "author": {
+    "name": "John Smith",
+    "email": "john@example.com"
+  },
+  "tags": ["サンプル", "文書", "JSON"]
+}
+
