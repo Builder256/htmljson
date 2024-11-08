@@ -6,6 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>RTM AddonForge</title>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@1.0.2/css/bulma.min.css">
+    <link rel="stylesheet" href="./assets/styles/bulma-checkbox.min.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@100..900&display=swap" rel="stylesheet">
@@ -25,7 +26,7 @@
             font-style: normal;
         }
 
-
+        /* https://github.com/jgthms/bulma/issues/886#issuecomment-549828207 */
         .fieldset {
             background-color: #fff;
             border-radius: 6px;
@@ -47,6 +48,13 @@
             width: max-content;
             border: 0 none
         }
+
+        .add-btn {
+            /* border: solid 0.5px #555; */
+            background-color: #ddd;
+            border-radius: 6px;
+            padding: 0 6px;
+        }
     </style>
 </head>
 
@@ -56,544 +64,881 @@
             <h1 class="title is-1">RTM AddonForge</h1>
         </div>
 
-        <h2 class="title">アドオンの設定</h2>
-        <p class="subtitle is-5">全ての車両に共通の設定</p>
+        <section class="section">
+            <h2 class="title">アドオンの設定</h2>
+            <!-- <p class="subtitle is-5">全ての車両に共通の設定</p> -->
 
-        <div class="box">
-            <div class="field">
-                <label class="label" for="addonName">アドオン名</label>
-                <div class="control">
-                    <input class="input" type="text" name="addonName" id="addonName">
-                </div>
-                <p class="help">この項目は必須です</p>
-            </div>
-
-
-
-            <div class="field">
-                <label class="label" for="trainType">車両タイプ [trainType]</label>
-                <div class="control">
-                    <div class="select">
-                        <select name="trainType" id="json-trainType">
-                            <option value="EC">電車</option>
-                            <option value="DC">気動車</option>
-                            <option value="CC">貨車</option>
-                            <option value="TC">タンク車</option>
-                        </select>
-                    </div>
-                </div>
-                <p class="help">この項目は必須です</p>
-            </div>
-
-            <div class="field">
-                <label class="label" for="tags">タグ [tags]</label>
-                <p>検索欄で検索する際に使うインデックス<br>
-                    形式名や会社名、路線名、作者名などを入れておくとよいでしょう</p>
-                <div class="control">
-                    <input class="input" type="text" name="tags" id="json-tags">
-                </div>
-            </div>
-
-
-            <div class="field">
-                <p class="label">JSONファイルの配置場所</p>
-                <div class="control">
-                    <label class="radio" for="json-json-location-choice1">
-                        <input type="radio" name="json-location" id="json-json-location-choice1" value="minecraft"
-                            checked>
-                        assets/minecraft/json
-                    </label>
-
-                    <label for="json-json-location-choice2">
-                        <input type="radio" name="json-location" id="json-json-location-choice2" value="models">
-                        assets/minecraft/models/json
-                    </label>
-
-
-                    <label for="json-json-location-choice3">
-                        <input type="radio" name="json-location" id="json-json-location-choice3" value="train">
-                        mods/RTM/train
-                    </label>
-                </div>
-            </div>
-
-        </div>
-
-        <h2 class="title">ファイルを選択</h2>
-        <p class="subtitle is-5">使用するすべてのファイルを選択してください</p>
-
-
-        <div class="box">
-            <div class="field">
-                <h3 class="title is-5">モデルファイルを選択</h3>
-                <div class="file has-name">
-                    <label class="file-label" for="modelfiles">
-                        <input class="file-input" accept=".mqo" type="file" name="modelfile" id="modelfiles" multiple>
-                        <span class="file-cta">
-                            <span class="file-label">モデルファイルを選択</span>
-                        </span>
-                        <span class="file-name">ファイルを選択してください</span>
-                    </label>
-                </div>
-            </div>
-            <h3 class="title is-5">読み込み中のモデルファイル</h3>
-            <div>
-                <p class="button">モデルファイル名1.mqo</p>
-                <p class="button">モデルファイル名2.mqo</p>
-                <p class="button">モデルファイル名3.mqo</p>
-                <p class="button">モデルファイル名4.mqo</p>
-                <p class="button">モデルファイル名5.mqo</p>
-                <p class="button">モデルファイル名6.mqo</p>
-                <p class="button">モデルファイル名7.mqo</p>
-                <p class="button">モデルファイル名8.mqo</p>
-                <p class="button">モデルファイル名9.mqo</p>
-                <p class="button">モデルファイル名10.mqo</p>
-                <p class="button">モデルファイル名11.mqo</p>
-                <p class="button">モデルファイル名12.mqo</p>
-                <p class="button">モデルファイル名13.mqo</p>
-                <p class="button">モデルファイル名14.mqo</p>
-            </div>
-        </div>
-
-
-        <div class="box">
-            <div class="field">
-                <h3 class="title is-5">テクスチャファイルを選択</h3>
-                <div class="file has-name">
-                    <label class="file-label" for="texturefiles">
-                        <input class="file-input" accept=".png" type="file" name="texturefile" id="texturefiles"
-                            multiple>
-                        <span class="file-cta">
-                            <span class="file-label">テクスチャファイルを選択</span>
-                        </span>
-                        <span class="file-name">ファイルを選択してください</span>
-                    </label>
-                </div>
-            </div>
-            <h3 class="title is-5">読み込み中のテクスチャファイル</h3>
-            <div class="columns is-multiline">
-                <div class="column is-one-fifth">
-                    <figure class="">
-                        <img src="https://placehold.co/1024x1024/png" alt="" srcset="">
-                        <figcaption>テクスチャファイル名.png</figcaption>
-                    </figure>
-                </div>
-                <div class="column is-one-fifth">
-                    <figure class="">
-                        <img src="https://placehold.co/1024x1024/png" alt="" srcset="">
-                        <figcaption>テクスチャファイル名.png</figcaption>
-                    </figure>
-                </div>
-                <div class="column is-one-fifth">
-                    <figure class="">
-                        <img src="https://placehold.co/1024x1024/png" alt="" srcset="">
-                        <figcaption>テクスチャファイル名.png</figcaption>
-                    </figure>
-                </div>
-                <div class="column is-one-fifth">
-                    <figure class="">
-                        <img src="https://placehold.co/1024x1024/png" alt="" srcset="">
-                        <figcaption>テクスチャファイル名.png</figcaption>
-                    </figure>
-                </div>
-                <div class="column is-one-fifth">
-                    <figure class="">
-                        <img src="https://placehold.co/1024x1024/png" alt="" srcset="">
-                        <figcaption>テクスチャファイル名.png</figcaption>
-                    </figure>
-                </div>
-                <div class="column is-one-fifth">
-                    <figure class="">
-                        <img src="https://placehold.co/1024x1024/png" alt="" srcset="">
-                        <figcaption>テクスチャファイル名.png</figcaption>
-                    </figure>
-                </div>
-                <div class="column is-one-fifth">
-                    <figure class="">
-                        <img src="https://placehold.co/1024x1024/png" alt="" srcset="">
-                        <figcaption>テクスチャファイル名.png</figcaption>
-                    </figure>
-                </div>
-                <div class="column is-one-fifth">
-                    <figure class="">
-                        <img src="https://placehold.co/1024x1024/png" alt="" srcset="">
-                        <figcaption>テクスチャファイル名.png</figcaption>
-                    </figure>
-                </div>
-            </div>
-        </div>
-
-
-        <div class="box">
-            <div class="field">
-                <h3 class="title is-5">スクリプトファイルを選択</h3>
-                <div class="file has-name">
-                    <label class="file-label" for="scriptfiles">
-                        <input class="file-input" accept=".js" type="file" name="scriptfile" id="scriptfiles" multiple>
-                        <span class="file-cta">
-                            <span class="file-label">スクリプトファイルを選択</span>
-                        </span>
-                        <span class="file-name">ファイルを選択してください</span>
-                    </label>
-                </div>
-            </div>
-            <h3 class="title is-5">読み込み中のスクリプトファイル</h3>
-            <div>
-                <p class="button">スクリプトファイル.js</p>
-                <p class="button">スクリプトファイル.js</p>
-                <p class="button">スクリプトファイル.js</p>
-                <p class="button">スクリプトファイル.js</p>
-                <p class="button">スクリプトファイル.js</p>
-                <p class="button">スクリプトファイル.js</p>
-                <p class="button">スクリプトファイル.js</p>
-            </div>
-        </div>
-
-        <h2 class="title">車両の設定</h2>
-        <p class="subtitle is-5">個別の車両ごとの設定</p>
-        <div class="box">
-
-            <div class="tabs">
-                <ul>
-                    <li class="is-active">
-                        <a>
-                            <span>1両目</span>
-                        </a>
-                    </li>
-                    <li>
-                        <a>
-                            <span>2両目</span>
-                        </a>
-                    </li>
-                    <li>
-                        <a>
-                            <span>3両目</span>
-                        </a>
-                    </li>
-                    <li>
-                        <a>
-                            <span>4両目</span>
-                        </a>
-                    </li>
-                    <li>
-                        <a>
-                            <span>5両目</span>
-                        </a>
-                    </li>
-                    <li>
-                        <a>
-                            <span>6両目</span>
-                        </a>
-                    </li>
-                    <li>
-                        <a>
-                            <span>7両目</span>
-                        </a>
-                    </li>
-                    <li>
-                        <a>
-                            <span>8両目</span>
-                        </a>
-                    </li>
-                </ul>
-            </div>
-
-            <div class="field">
-                <label class="label" for="trainName">車両名 [trainName]</label>
-                <div class="control">
-                    <input class="input" type="text" name="trainName" id="json-trainName">
-                </div>
-                <p class="help">この項目は必須です</p>
-            </div>
-
-            <div class="field">
-                <label for="" class="label">モデルファイルを選択</label>
-                <div class="control">
-                    <div class="select">
-                        <select name="" id="">
-                            <option value="">モデルファイル名1.mqo</option>
-                            <option value="">モデルファイル名2.mqo</option>
-                            <option value="">モデルファイル名3.mqo</option>
-                            <option value="">モデルファイル名4.mqo</option>
-                            <option value="">モデルファイル名5.mqo</option>
-                            <option value="">モデルファイル名6.mqo</option>
-                        </select>
-                    </div>
-                </div>
-            </div>
-
-            <fieldset class="fieldset">
-                <legend>${materialName}</legend>
+            <div class="box">
                 <div class="field">
-                    <label for="" class="label">テクスチャファイルを選択</label>
+                    <label class="label" for="addonName">アドオン名</label>
+                    <div class="control">
+                        <input class="input" type="text" name="addonName" id="addonName">
+                    </div>
+                    <p class="help">この項目は必須です</p>
+                </div>
+
+
+
+                <div class="field">
+                    <label class="label" for="trainType">車両タイプ [trainType]</label>
+                    <div class="control">
+                        <div class="select">
+                            <select name="trainType" id="json-trainType">
+                                <option value="EC">電車</option>
+                                <option value="DC">気動車</option>
+                                <option value="CC">貨車</option>
+                                <option value="TC">タンク車</option>
+                            </select>
+                        </div>
+                    </div>
+                    <p class="help">この項目は必須です</p>
+                </div>
+
+                <div class="field">
+                    <label class="label" for="tags">タグ [tags]</label>
+                    <p>モデルを検索する際に使うインデックス<br>
+                        形式名や会社名、路線名、作者名などを入れておくとよいでしょう</p>
+                    <div class="control">
+                        <input class="input" type="text" name="tags" id="json-tags">
+                    </div>
+                </div>
+
+
+                <div class="field">
+                    <p class="label">JSONファイルの配置場所</p>
+                    <div class="control">
+                        <label class="radio" for="json-json-location-choice1">
+                            <input type="radio" name="json-location" id="json-json-location-choice1" value="minecraft"
+                                checked>
+                            assets/minecraft/json
+                        </label>
+
+                        <label for="json-json-location-choice2">
+                            <input type="radio" name="json-location" id="json-json-location-choice2" value="models">
+                            assets/minecraft/models/json
+                        </label>
+
+
+                        <label for="json-json-location-choice3">
+                            <input type="radio" name="json-location" id="json-json-location-choice3" value="train">
+                            mods/RTM/train
+                        </label>
+                    </div>
+                </div>
+
+            </div>
+
+            <h2 class="title">ファイルを選択</h2>
+            <p class="subtitle is-5">使用するすべてのファイルを選択してください</p>
+
+
+            <div class="box">
+                <div class="field">
+                    <h3 class="title is-5">モデルファイルを選択</h3>
+                    <div class="file has-name">
+                        <label class="file-label" for="modelfiles">
+                            <input class="file-input" accept=".mqo" type="file" name="modelfile" id="modelfiles"
+                                multiple>
+                            <span class="file-cta">
+                                <span class="file-label">モデルファイルを選択</span>
+                            </span>
+                            <span class="file-name">ファイルを選択してください</span>
+                        </label>
+                    </div>
+                </div>
+                <h3 class="title is-5">読み込み中のモデルファイル</h3>
+                <div>
+                    <p class="button">モデルファイル名1.mqo</p>
+                    <p class="button">モデルファイル名2.mqo</p>
+                    <p class="button">モデルファイル名3.mqo</p>
+                    <p class="button">モデルファイル名4.mqo</p>
+                    <p class="button">モデルファイル名5.mqo</p>
+                    <p class="button">モデルファイル名6.mqo</p>
+                    <p class="button">モデルファイル名7.mqo</p>
+                    <p class="button">モデルファイル名8.mqo</p>
+                    <p class="button">モデルファイル名9.mqo</p>
+                    <p class="button">モデルファイル名10.mqo</p>
+                    <p class="button">モデルファイル名11.mqo</p>
+                    <p class="button">モデルファイル名12.mqo</p>
+                    <p class="button">モデルファイル名13.mqo</p>
+                    <p class="button">モデルファイル名14.mqo</p>
+                </div>
+            </div>
+
+
+            <div class="box">
+                <div class="field">
+                    <h3 class="title is-5">テクスチャファイルを選択</h3>
+                    <div class="file has-name">
+                        <label class="file-label" for="texturefiles">
+                            <input class="file-input" accept=".png" type="file" name="texturefile" id="texturefiles"
+                                multiple>
+                            <span class="file-cta">
+                                <span class="file-label">テクスチャファイルを選択</span>
+                            </span>
+                            <span class="file-name">ファイルを選択してください</span>
+                        </label>
+                    </div>
+                </div>
+                <h3 class="title is-5">読み込み中のテクスチャファイル</h3>
+                <div class="columns is-multiline">
+                    <div class="column is-one-fifth">
+                        <figure class="">
+                            <img src="https://placehold.co/1024x1024/png" alt="" srcset="">
+                            <figcaption>テクスチャファイル名.png</figcaption>
+                        </figure>
+                    </div>
+                    <div class="column is-one-fifth">
+                        <figure class="">
+                            <img src="https://placehold.co/1024x1024/png" alt="" srcset="">
+                            <figcaption>テクスチャファイル名.png</figcaption>
+                        </figure>
+                    </div>
+                    <div class="column is-one-fifth">
+                        <figure class="">
+                            <img src="https://placehold.co/1024x1024/png" alt="" srcset="">
+                            <figcaption>テクスチャファイル名.png</figcaption>
+                        </figure>
+                    </div>
+                    <div class="column is-one-fifth">
+                        <figure class="">
+                            <img src="https://placehold.co/1024x1024/png" alt="" srcset="">
+                            <figcaption>テクスチャファイル名.png</figcaption>
+                        </figure>
+                    </div>
+                    <div class="column is-one-fifth">
+                        <figure class="">
+                            <img src="https://placehold.co/1024x1024/png" alt="" srcset="">
+                            <figcaption>テクスチャファイル名.png</figcaption>
+                        </figure>
+                    </div>
+                    <div class="column is-one-fifth">
+                        <figure class="">
+                            <img src="https://placehold.co/1024x1024/png" alt="" srcset="">
+                            <figcaption>テクスチャファイル名.png</figcaption>
+                        </figure>
+                    </div>
+                    <div class="column is-one-fifth">
+                        <figure class="">
+                            <img src="https://placehold.co/1024x1024/png" alt="" srcset="">
+                            <figcaption>テクスチャファイル名.png</figcaption>
+                        </figure>
+                    </div>
+                    <div class="column is-one-fifth">
+                        <figure class="">
+                            <img src="https://placehold.co/1024x1024/png" alt="" srcset="">
+                            <figcaption>テクスチャファイル名.png</figcaption>
+                        </figure>
+                    </div>
+                </div>
+            </div>
+
+
+            <div class="box">
+                <div class="field">
+                    <h3 class="title is-5">スクリプトファイルを選択</h3>
+                    <div class="file has-name">
+                        <label class="file-label" for="scriptfiles">
+                            <input class="file-input" accept=".js" type="file" name="scriptfile" id="scriptfiles"
+                                multiple>
+                            <span class="file-cta">
+                                <span class="file-label">スクリプトファイルを選択</span>
+                            </span>
+                            <span class="file-name">ファイルを選択してください</span>
+                        </label>
+                    </div>
+                </div>
+                <h3 class="title is-5">読み込み中のスクリプトファイル</h3>
+                <div>
+                    <p class="button">スクリプトファイル.js</p>
+                    <p class="button">スクリプトファイル.js</p>
+                    <p class="button">スクリプトファイル.js</p>
+                    <p class="button">スクリプトファイル.js</p>
+                    <p class="button">スクリプトファイル.js</p>
+                    <p class="button">スクリプトファイル.js</p>
+                    <p class="button">スクリプトファイル.js</p>
+                </div>
+            </div>
+
+            <h2 class="title">車両の設定</h2>
+            <p class="subtitle is-5">個別の車両ごとの設定</p>
+
+            <div class="box">
+                <h3 class="title is-4">全ての車両に共通させる設定</h3>
+                <p class="subtitle is-6">車両ごとに上書き設定可</p>
+
+
+
+                <!-- <div class="field">
+                <label class="b-checkbox checkbox">
+                    <input type="checkbox" name="" id="">
+                    <span class="check is-info"></span>
+                    <span class="control-label">デフォルトの音声を使用する</span>
+                </label>
+            </div> -->
+
+                <div class="field is-horizontal">
+                    <div class="field-label is-normal">
+                        <label for="" class="label">音声スクリプトを設定</label>
+                    </div>
+                    <div class="field-body">
+                        <div class="field has-addons">
+
+                            <div class="control">
+                                <div class="select">
+                                    <select name="" id="">
+                                        <option value="">デフォルトを使用する</option>
+                                        <option value="">スクリプトファイル.js</option>
+                                        <option value="">スクリプトファイル.js</option>
+                                        <option value="">スクリプトファイル.js</option>
+                                        <option value="">スクリプトファイル.js</option>
+                                    </select>
+                                </div>
+                            </div>
+
+                            <div class="control is-expanded">
+                                <input type="text" class="input"
+                                    placeholder='サウンドライブラリを使用する場合は"soundScriptPath"を入力 例: scripts/hi03SoundLib_OER4000'>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+
+
+                <!-- https://github.com/jgthms/bulma/issues/777#issuecomment-1079940397 -->
+
+
+                <div class="field is-horizontal">
+                    <div class="field-label is-normal">
+                        <label for="" class="label">ブレーキ緩解音（強）</label>
+                    </div>
+                    <div class="field-body">
+                        <div class="field is-expanded">
+                            <div class="field has-addons">
+                                <label class="control">
+                                    <span class="button is-static">
+                                        <span class="has-text-weight-normal checkbox">
+                                            <input type="checkbox" name="" id="">
+                                            デフォルトを使用する
+                                        </span>
+                                        &nbsp;
+                                    </span>
+                                </label>
+                                <div class="control is-expanded">
+                                    <input type="text" name="" id="" class="input">
+                                </div>
+                            </div>
+                            <p class="help">placeholder</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="field is-horizontal">
+                    <div class="field-label is-normal">
+                        <label for="" class="label">ブレーキ緩解音（弱）</label>
+                    </div>
+                    <div class="field-body">
+                        <div class="field is-expanded">
+                            <div class="field has-addons">
+                                <label class="control">
+                                    <span class="button is-static">
+                                        <span class="has-text-weight-normal checkbox">
+                                            <input type="checkbox" name="" id="">
+                                            デフォルトを使用する
+                                        </span>
+                                        &nbsp;
+                                    </span>
+                                </label>
+                                <div class="control is-expanded">
+                                    <input type="text" name="" id="" class="input">
+                                </div>
+                            </div>
+                            <p class="help"></p>
+                        </div>
+                    </div>
+                </div>
+                <div class="field is-horizontal">
+                    <div class="field-label is-normal">
+                        <label for="" class="label">音声（警笛）</label>
+                    </div>
+                    <div class="field-body">
+                        <div class="field is-expanded">
+                            <div class="field has-addons">
+                                <label class="control">
+                                    <span class="button is-static">
+                                        <span class="has-text-weight-normal checkbox">
+                                            <input type="checkbox" name="" id="">
+                                            デフォルトを使用する
+                                        </span>
+                                        &nbsp;
+                                    </span>
+                                </label>
+                                <div class="control is-expanded">
+                                    <input type="text" name="" id="" class="input">
+                                </div>
+                            </div>
+                            <p class="help"></p>
+                        </div>
+                    </div>
+                </div>
+                <div class="field is-horizontal">
+                    <div class="field-label is-normal">
+                        <label for="" class="label">音声（ドア開）</label>
+                    </div>
+                    <div class="field-body">
+                        <div class="field is-expanded">
+                            <div class="field has-addons">
+                                <label class="control">
+                                    <span class="button is-static">
+                                        <span class="has-text-weight-normal checkbox">
+                                            <input type="checkbox" name="" id="">
+                                            デフォルトを使用する
+                                        </span>
+                                        &nbsp;
+                                    </span>
+                                </label>
+                                <div class="control is-expanded">
+                                    <input type="text" name="" id="" class="input">
+                                </div>
+                            </div>
+                            <p class="help"></p>
+                        </div>
+                    </div>
+                </div>
+                <div class="field is-horizontal">
+                    <div class="field-label is-normal">
+                        <label for="" class="label">音声（ドア閉）
+                        </label>
+                    </div>
+                    <div class="field-body">
+                        <div class="field is-expanded">
+                            <div class="field has-addons">
+                                <label class="control">
+                                    <span class="button is-static">
+                                        <span class="has-text-weight-normal checkbox">
+                                            <input type="checkbox" name="" id="">
+                                            デフォルトを使用する
+                                        </span>
+                                        &nbsp;
+                                    </span>
+                                </label>
+                                <div class="control is-expanded">
+                                    <input type="text" name="" id="" class="input">
+                                </div>
+                            </div>
+                            <p class="help"></p>
+                        </div>
+                    </div>
+                </div>
+
+
+
+
+                <!-- <div class="field is-horizontal">
+                <div class="field-label"></div>
+                <div class="field-body">
+                    <div class="field is-expanded">
+                        <div class="field has-addons">
+                            <p class="control">
+                                <a class="button is-static">
+                                    +44
+                                </a>
+                            </p>
+                            <p class="control is-expanded">
+                                <input class="input" type="tel" placeholder="Your phone number">
+                            </p>
+                        </div>
+                        <p class="help">Do not enter the first zero</p>
+                    </div>
+                </div>
+            </div> -->
+
+
+                <div class="field"></div>
+
+
+
+
+
+
+
+            </div>
+            <div class="box">
+
+                <div class="tabs">
+                    <ul>
+                        <li class="is-active">
+                            <a>
+                                <span>1両目</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a>
+                                <span>2両目</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a>
+                                <span>3両目</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a>
+                                <span>4両目</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a>
+                                <span>5両目</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a>
+                                <span>6両目</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a>
+                                <span>7両目</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a>
+                                <span>8両目</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a>
+                                <span class="add-btn has-text-link has-background-grey-lighter">
+                                    追加
+                                </span>
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+
+                <div class="field">
+                    <label class="label" for="trainName">車両名 [trainName]</label>
+                    <div class="control">
+                        <input class="input" type="text" name="trainName" id="json-trainName">
+                    </div>
+                    <p class="help">この項目は必須です</p>
+                </div>
+
+                <div class="field">
+                    <label for="" class="label">モデルファイルを選択</label>
                     <div class="control">
                         <div class="select">
                             <select name="" id="">
-                                <option value="">テクスチャファイル名.png</option>
-                                <option value="">テクスチャファイル名.png</option>
-                                <option value="">テクスチャファイル名.png</option>
-                                <option value="">テクスチャファイル名.png</option>
+                                <option value="">モデルファイル名1.mqo</option>
+                                <option value="">モデルファイル名2.mqo</option>
+                                <option value="">モデルファイル名3.mqo</option>
+                                <option value="">モデルファイル名4.mqo</option>
+                                <option value="">モデルファイル名5.mqo</option>
+                                <option value="">モデルファイル名6.mqo</option>
                             </select>
                         </div>
                     </div>
                 </div>
 
-                <div class="field">
-                    <label class="label" for="">オプション</label>
-                    <div class="checkboxes">
-
-                        <div class="control">
-                            <label for="" class="checkbox">
-                                <input type="checkbox" name="" id="">
-                                透過 [Light]
-                            </label>
-                            <label for="" class="checkbox">
-                                <input type="checkbox" name="" id="">
-                                発光 [AlphaBlend]
-                            </label>
-                        </div>
-                    </div>
-                </div>
-            </fieldset>
-            <fieldset class="fieldset">
-                <legend>${materialName}</legend>
-                <div class="field">
-                    <label for="" class="label">テクスチャファイルを選択</label>
-                    <div class="control">
-                        <div class="select">
-                            <select name="" id="">
-                                <option value="">テクスチャファイル名.png</option>
-                                <option value="">テクスチャファイル名.png</option>
-                                <option value="">テクスチャファイル名.png</option>
-                                <option value="">テクスチャファイル名.png</option>
-                            </select>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="field">
-                    <label class="label" for="">オプション</label>
-                    <div class="checkboxes">
-
-                        <div class="control">
-                            <label for="" class="checkbox">
-                                <input type="checkbox" name="" id="">
-                                透過 [Light]
-                            </label>
-                            <label for="" class="checkbox">
-                                <input type="checkbox" name="" id="">
-                                発光 [AlphaBlend]
-                            </label>
-                        </div>
-                    </div>
-                </div>
-            </fieldset>
-            <fieldset class="fieldset">
-                <legend>${materialName}</legend>
-                <div class="field">
-                    <label for="" class="label">テクスチャファイルを選択</label>
-                    <div class="control">
-                        <div class="select">
-                            <select name="" id="">
-                                <option value="">テクスチャファイル名.png</option>
-                                <option value="">テクスチャファイル名.png</option>
-                                <option value="">テクスチャファイル名.png</option>
-                                <option value="">テクスチャファイル名.png</option>
-                            </select>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="field">
-                    <label class="label" for="">オプション</label>
-                    <div class="checkboxes">
-
-                        <div class="control">
-                            <label for="" class="checkbox">
-                                <input type="checkbox" name="" id="">
-                                透過 [Light]
-                            </label>
-                            <label for="" class="checkbox">
-                                <input type="checkbox" name="" id="">
-                                発光 [AlphaBlend]
-                            </label>
-                        </div>
-                    </div>
-                </div>
-            </fieldset>
-
-            <div class="field">
-                <label for="" class="label">描画スクリプトファイルを選択</label>
-                <div class="control">
-                    <div class="select">
-                        <select name="" id="">
-                            <option value="">スクリプトファイル.js</option>
-                            <option value="">スクリプトファイル.js</option>
-                            <option value="">スクリプトファイル.js</option>
-                            <option value="">スクリプトファイル.js</option>
-                        </select>
-                    </div>
-                </div>
-            </div>
-
-            <div class="columns">
-                <div class="column">
-                    <fieldset class="fieldset">
-                        <legend>前台車の設定</legend>
-                        <div class="field">
-                            <label for="" class="label">モデルファイルを選択</label>
-                            <div class="control">
-                                <div class="select">
-                                    <select name="" id="">
-                                        <option value="">モデルファイル名1.mqo</option>
-                                        <option value="">モデルファイル名2.mqo</option>
-                                        <option value="">モデルファイル名3.mqo</option>
-                                        <option value="">モデルファイル名4.mqo</option>
-                                        <option value="">モデルファイル名5.mqo</option>
-                                        <option value="">モデルファイル名6.mqo</option>
-                                    </select>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="field">
-                            <label for="" class="label">テクスチャファイルを選択</label>
-                            <div class="control">
-                                <div class="select">
-                                    <select name="" id="">
-                                        <option value="">テクスチャファイル名.png</option>
-                                        <option value="">テクスチャファイル名.png</option>
-                                        <option value="">テクスチャファイル名.png</option>
-                                        <option value="">テクスチャファイル名.png</option>
-                                    </select>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="field">
-                            <label for="" class="label">描画スクリプトファイルを選択</label>
-                            <div class="control">
-                                <div class="select">
-                                    <select name="" id="">
-                                        <option value="">スクリプトファイル.js</option>
-                                        <option value="">スクリプトファイル.js</option>
-                                        <option value="">スクリプトファイル.js</option>
-                                        <option value="">スクリプトファイル.js</option>
-                                    </select>
-                                </div>
-                            </div>
-                        </div>
-                    </fieldset>
-                </div>
-
-                <div class="column">
-                    <fieldset class="fieldset">
-                        <legend>後台車の設定</legend>
-                        <div class="field">
-                            <label for="" class="label">モデルファイルを選択</label>
-                            <div class="control">
-                                <div class="select">
-                                    <select name="" id="">
-                                        <option value="">モデルファイル名1.mqo</option>
-                                        <option value="">モデルファイル名2.mqo</option>
-                                        <option value="">モデルファイル名3.mqo</option>
-                                        <option value="">モデルファイル名4.mqo</option>
-                                        <option value="">モデルファイル名5.mqo</option>
-                                        <option value="">モデルファイル名6.mqo</option>
-                                    </select>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="field">
-                            <label for="" class="label">テクスチャファイルを選択</label>
-                            <div class="control">
-                                <div class="select">
-                                    <select name="" id="">
-                                        <option value="">テクスチャファイル名.png</option>
-                                        <option value="">テクスチャファイル名.png</option>
-                                        <option value="">テクスチャファイル名.png</option>
-                                        <option value="">テクスチャファイル名.png</option>
-                                    </select>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="field">
-                            <label for="" class="label">描画スクリプトファイルを選択</label>
-                            <div class="control">
-                                <div class="select">
-                                    <select name="" id="">
-                                        <option value="">スクリプトファイル.js</option>
-                                        <option value="">スクリプトファイル.js</option>
-                                        <option value="">スクリプトファイル.js</option>
-                                        <option value="">スクリプトファイル.js</option>
-                                    </select>
-                                </div>
-                            </div>
-                        </div>
-                    </fieldset>
-
-                </div>
-            </div>
-
-
-            <div class="field">
-                <label for="" class="label">ボタンテクスチャファイルを選択</label>
-                <div class="control">
-                    <div class="select">
-                        <select name="" id="">
-                            <option value="">テクスチャファイル名.png</option>
-                            <option value="">テクスチャファイル名.png</option>
-                            <option value="">テクスチャファイル名.png</option>
-                            <option value="">テクスチャファイル名.png</option>
-                        </select>
-                    </div>
-                </div>
-            </div>
-
-            <div class="field">
-                <label for="" class="label">音声スクリプトを設定</label>
-                <div class="control">
-                    <div class="field has-addons">
+                <fieldset class="fieldset">
+                    <legend>${materialName}</legend>
+                    <div class="field">
+                        <label for="" class="label">テクスチャファイルを選択</label>
                         <div class="control">
                             <div class="select">
                                 <select name="" id="">
-                                    <option value="">スクリプトファイル.js</option>
-                                    <option value="">スクリプトファイル.js</option>
-                                    <option value="">スクリプトファイル.js</option>
-                                    <option value="">スクリプトファイル.js</option>
+                                    <option value="">テクスチャファイル名.png</option>
+                                    <option value="">テクスチャファイル名.png</option>
+                                    <option value="">テクスチャファイル名.png</option>
+                                    <option value="">テクスチャファイル名.png</option>
                                 </select>
                             </div>
                         </div>
+                    </div>
 
-                        <div class="control is-expanded">
-                            <input type="text" class="input"
-                                placeholder='サウンドライブラリを使用する場合は"soundScriptPath"を入力 例: scripts/hi03SoundLib_OER4000'>
+                    <div class="field">
+                        <label class="label" for="">オプション</label>
+                        <div class="checkboxes">
+
+                            <div class="control">
+                                <label for="" class="checkbox">
+                                    <input type="checkbox" name="" id="">
+                                    透過 [Light]
+                                </label>
+                                <label for="" class="checkbox">
+                                    <input type="checkbox" name="" id="">
+                                    発光 [AlphaBlend]
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+                </fieldset>
+                <fieldset class="fieldset">
+                    <legend>${materialName}</legend>
+                    <div class="field">
+                        <label for="" class="label">テクスチャファイルを選択</label>
+                        <div class="control">
+                            <div class="select">
+                                <select name="" id="">
+                                    <option value="">テクスチャファイル名.png</option>
+                                    <option value="">テクスチャファイル名.png</option>
+                                    <option value="">テクスチャファイル名.png</option>
+                                    <option value="">テクスチャファイル名.png</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="field">
+                        <label class="label" for="">オプション</label>
+                        <div class="checkboxes">
+
+                            <div class="control">
+                                <label for="" class="checkbox">
+                                    <input type="checkbox" name="" id="">
+                                    透過 [Light]
+                                </label>
+                                <label for="" class="checkbox">
+                                    <input type="checkbox" name="" id="">
+                                    発光 [AlphaBlend]
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+                </fieldset>
+                <fieldset class="fieldset">
+                    <legend>${materialName}</legend>
+                    <div class="field">
+                        <label for="" class="label">テクスチャファイルを選択</label>
+                        <div class="control">
+                            <div class="select">
+                                <select name="" id="">
+                                    <option value="">テクスチャファイル名.png</option>
+                                    <option value="">テクスチャファイル名.png</option>
+                                    <option value="">テクスチャファイル名.png</option>
+                                    <option value="">テクスチャファイル名.png</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="field">
+                        <label class="label" for="">オプション</label>
+                        <div class="checkboxes">
+
+                            <div class="control">
+                                <label for="" class="checkbox">
+                                    <input type="checkbox" name="" id="">
+                                    透過 [Light]
+                                </label>
+                                <label for="" class="checkbox">
+                                    <input type="checkbox" name="" id="">
+                                    発光 [AlphaBlend]
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+                </fieldset>
+
+                <div class="field">
+                    <label for="" class="label">描画スクリプトファイルを選択</label>
+                    <div class="control">
+                        <div class="select">
+                            <select name="" id="">
+                                <option value="">スクリプトファイル.js</option>
+                                <option value="">スクリプトファイル.js</option>
+                                <option value="">スクリプトファイル.js</option>
+                                <option value="">スクリプトファイル.js</option>
+                            </select>
                         </div>
                     </div>
                 </div>
-            </div>
 
+                <div class="columns">
+                    <div class="column">
+                        <fieldset class="fieldset">
+                            <legend>前台車の設定</legend>
+                            <div class="field">
+                                <label for="" class="label">モデルファイルを選択</label>
+                                <div class="control">
+                                    <div class="select">
+                                        <select name="" id="">
+                                            <option value="">モデルファイル名1.mqo</option>
+                                            <option value="">モデルファイル名2.mqo</option>
+                                            <option value="">モデルファイル名3.mqo</option>
+                                            <option value="">モデルファイル名4.mqo</option>
+                                            <option value="">モデルファイル名5.mqo</option>
+                                            <option value="">モデルファイル名6.mqo</option>
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
 
-            <div class="field">
-                <div class="control">
-                    <button class="button" id="generate-jsonfile">JSONファイルを生成</button>
+                            <div class="field">
+                                <label for="" class="label">テクスチャファイルを選択</label>
+                                <div class="control">
+                                    <div class="select">
+                                        <select name="" id="">
+                                            <option value="">テクスチャファイル名.png</option>
+                                            <option value="">テクスチャファイル名.png</option>
+                                            <option value="">テクスチャファイル名.png</option>
+                                            <option value="">テクスチャファイル名.png</option>
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="field">
+                                <label for="" class="label">描画スクリプトファイルを選択</label>
+                                <div class="control">
+                                    <div class="select">
+                                        <select name="" id="">
+                                            <option value="">スクリプトファイル.js</option>
+                                            <option value="">スクリプトファイル.js</option>
+                                            <option value="">スクリプトファイル.js</option>
+                                            <option value="">スクリプトファイル.js</option>
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+                        </fieldset>
+                    </div>
+
+                    <div class="column">
+                        <fieldset class="fieldset">
+                            <legend>後台車の設定</legend>
+                            <div class="field">
+                                <label for="" class="label">モデルファイルを選択</label>
+                                <div class="control">
+                                    <div class="select">
+                                        <select name="" id="">
+                                            <option value="">モデルファイル名1.mqo</option>
+                                            <option value="">モデルファイル名2.mqo</option>
+                                            <option value="">モデルファイル名3.mqo</option>
+                                            <option value="">モデルファイル名4.mqo</option>
+                                            <option value="">モデルファイル名5.mqo</option>
+                                            <option value="">モデルファイル名6.mqo</option>
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="field">
+                                <label for="" class="label">テクスチャファイルを選択</label>
+                                <div class="control">
+                                    <div class="select">
+                                        <select name="" id="">
+                                            <option value="">テクスチャファイル名.png</option>
+                                            <option value="">テクスチャファイル名.png</option>
+                                            <option value="">テクスチャファイル名.png</option>
+                                            <option value="">テクスチャファイル名.png</option>
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="field">
+                                <label for="" class="label">描画スクリプトファイルを選択</label>
+                                <div class="control">
+                                    <div class="select">
+                                        <select name="" id="">
+                                            <option value="">スクリプトファイル.js</option>
+                                            <option value="">スクリプトファイル.js</option>
+                                            <option value="">スクリプトファイル.js</option>
+                                            <option value="">スクリプトファイル.js</option>
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+                        </fieldset>
+
+                    </div>
                 </div>
-            </div>
-            <!-- 
+
+
+                <div class="field">
+                    <label for="" class="label">ボタンテクスチャファイルを選択</label>
+                    <div class="control">
+                        <div class="select">
+                            <select name="" id="">
+                                <option value="">テクスチャファイル名.png</option>
+                                <option value="">テクスチャファイル名.png</option>
+                                <option value="">テクスチャファイル名.png</option>
+                                <option value="">テクスチャファイル名.png</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="field">
+                    <label for="" class="label">方向幕テクスチャファイルを選択</label>
+                    <div class="control">
+                        <div class="select">
+                            <select name="" id="">
+                                <option value="">テクスチャファイル名.png</option>
+                                <option value="">テクスチャファイル名.png</option>
+                                <option value="">テクスチャファイル名.png</option>
+                                <option value="">テクスチャファイル名.png</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="field">
+                    <label for="" class="label">方向幕名を入力</label>
+                    <div class="field is-grouped is-grouped-multiline">
+                        <p class="control">
+                            <input class="input" type="text" name="" id="">
+                        </p>
+                        <p class="control">
+                            <input class="input" type="text" name="" id="">
+                        </p>
+                        <p class="control">
+                            <input class="input" type="text" name="" id="">
+                        </p>
+                        <p class="control">
+                            <input class="input" type="text" name="" id="">
+                        </p>
+                        <p class="control">
+                            <input class="input" type="text" name="" id="">
+                        </p>
+                        <p class="control">
+                            <input class="input" type="text" name="" id="">
+                        </p>
+                        <p class="control">
+                            <input class="input" type="text" name="" id="">
+                        </p>
+                        <p class="control">
+                            <button class="button">追加</button>
+                        </p>
+                    </div>
+                </div>
+
+                <fieldset class="fieldset">
+                    <legend>方向幕1</legend>
+
+                    <div class="field">
+                        <label for="" class="label">方向幕テクスチャの方向幕への割り当て座標</label>
+                        <div class="field has-addons">
+                            <div class="control">
+                                <a class="button is-static">U最小</a>
+                            </div>
+                            <div class="control">
+                                <input class="input" type="text" name="" id="">
+                            </div>
+                            <div class="control">
+                                <a class="button is-static">U最大</a>
+                            </div>
+                            <div class="control">
+                                <input class="input" type="text" name="" id="">
+                            </div>
+                            <div class="control">
+                                <a class="button is-static">V最小</a>
+                            </div>
+                            <div class="control">
+                                <input class="input" type="text" name="" id="">
+                            </div>
+                            <div class="control">
+                                <a class="button is-static">V最大</a>
+                            </div>
+                            <div class="control">
+                                <input class="input" type="text" name="" id="">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="field">
+                        <label for="" class="label">方向幕の向き</label>
+                        <div class="control">
+                            <div class="select">
+                                <select name="" id="">
+                                    <option value="">正面（Z軸+方向）</option>
+                                    <option value="">左面（X軸+方向）</option>
+                                    <option value="">右面（X軸-方向）</option>
+                                    <option value="">背面（Z軸-方向）</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="field">
+                        <label for="" class="label">方向幕の中心座標</label>
+                        <div class="field has-addons">
+                            <div class="control">
+                                <a class="button is-static">X座標</a>
+                            </div>
+                            <div class="control">
+                                <input class="input" type="text" name="" id="">
+                            </div>
+                            <div class="control">
+                                <a class="button is-static">Y座標</a>
+                            </div>
+                            <div class="control">
+                                <input class="input" type="text" name="" id="">
+                            </div>
+                            <div class="control">
+                                <a class="button is-static">Z座標</a>
+                            </div>
+                            <div class="control">
+                                <input class="input" type="text" name="" id="">
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="field">
+                        <label class="b-checkbox checkbox">
+                            <input type="checkbox" name="" id="">
+                            <span class="check is-info"></span>
+                            <span class="control-label">幕回しを有効化</span>
+                        </label>
+                    </div>
+                    <div class="field">
+                        <label class="b-checkbox checkbox">
+                            <input type="checkbox" name="" id="">
+                            <span class="check is-info"></span>
+                            <span class="control-label">発光を無効化</span>
+                        </label>
+                    </div>
+                </fieldset>
+
+
+                <!-- <div class="field">
+                    <label class="label">Label</label>
+                    <div class="control">
+                        <div class="field has-addons">
+                            <div class="control">
+                                <input type="text" class="input">
+                            </div>
+                            <div class="control">
+                                <a class="button">Send</a>
+                            </div>
+                        </div>
+                    </div>
+                </div> -->
+
+
+                <!-- 右上右下左下左上 -->
+
+                <div class="field">
+                    <div class="control">
+                        <button class="button" id="generate-jsonfile">JSONファイルを生成</button>
+                    </div>
+                </div>
+                <!-- 
             <label for="jsonfiles">
                 <input multiple accept=".json" type="file" name="jsonfile" id="jsonfiles">
             </label> -->
 
-            <div class="field">
-                <div class="control">
-                    <textarea class="textarea is-size-7" name="json" id="generatedJson" rows="20"
-                        placeholder="JSONファイルがここに生成されます"></textarea>
+                <div class="field">
+                    <div class="control">
+                        <textarea class="textarea is-size-7" name="json" id="generatedJson" rows="20"
+                            placeholder="JSONファイルがここに生成されます"></textarea>
+                    </div>
                 </div>
             </div>
-        </div>
-        <!-- <button id="createButton" disabled>アドオン作成</button> -->
+            <!-- <button id="createButton" disabled>アドオン作成</button> -->
+        </section>
     </form>
 </body>
 
